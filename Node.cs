@@ -48,6 +48,16 @@ namespace PathFinder {
 				return path;
 			}
 		}
+		public Node<T> endprev {
+			get {
+				if(next == null)
+					return null;
+				Node<T> curr = this;
+				while(curr.next.next != null)
+					curr = curr.next;
+				return curr;
+			}
+		}
 		public Node<T> end {
 			get {
 				Node<T> curr = this;
@@ -67,5 +77,13 @@ namespace PathFinder {
 			}
 		}
 		#endregion
+	}
+
+	public static class NodeExtensions {
+		public static IEnumerable<T> Values<T>(this IEnumerable<Node<T>> source) where T : IIndexed {
+			foreach(Node<T> item in source) {
+				yield return item.tile;
+			}
+		}
 	}
 }

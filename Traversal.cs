@@ -61,7 +61,7 @@ namespace PathFinder {
 
 		#region Traversals
 		public IEnumerable<Node<T>> SelectDijkstra(Func<T, bool> checkAdd, Func<T, T, float> findCost) =>
-			Traverse(new Heap<Node<T>>((s, t) => s.cost < t.cost, null, (s, t) => s.reduce = t, (s, t) => s.heapIndex = t), checkAdd, findCost);
+			Traverse(new PPHeap<Node<T>>((s, t) => s.cost < t.cost, null, (s, t) => s.reduce = t, (s, t) => s.heapIndex = t), checkAdd, findCost);
 		public IEnumerable<Node<T>> SelectBreadthFirst(Func<T, bool> checkAdd, Func<T, T, float> findCost) =>
 			Traverse(new PPQueue<Node<T>>(), checkAdd, findCost);
 		public IEnumerable<Node<T>> SelectDepthFirst(Func<T, bool> checkAdd, Func<T, T, float> findCost) =>
